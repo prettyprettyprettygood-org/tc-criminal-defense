@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+---
+
+<BaseLayout
+  title="Astro Project Template"
+  description="Reusable Astro starter for accessible, mission-first websites with strong defaults."
+>
+  <section class="section hero stack">
+    <p class="kicker">Home Page Template</p>
+    <h1>Use this as your primary project canvas.</h1>
+    <p class="hero-copy">
+      Keep this page focused on your client story. For building and naming reusable pieces, use the
+      Example page component catalog.
+    </p>
+    <div class="hero-actions">
+      <Button href="/example" variant="outline">Open Example page</Button>
+      <Button type="button" variant="ghost">Replace this hero copy</Button>
+    </div>
+  </section>
+
+  <section class="section stack">
+    <div>
+      <p class="kicker">Content Structure</p>
+      <h2>Keep section rhythm consistent on every page.</h2>
+    </div>
+    <div class="grid-3 grid">
+      <Card title="Section spacing" eyebrow="Use shared tokens">
+        Reuse the same section wrapper spacing so every page feels consistent and intentional.
+      </Card>
+      <Card title="Component reuse" eyebrow="No one-off markup">
+        Build pages by arranging shared components from the Example page catalog.
+      </Card>
+      <Card title="Responsive flow" eyebrow="Mobile-first behavior">
+        Keep content stacking predictable by using the approved layout and grid classes.
+      </Card>
+    </div>
+  </section>
+
+  <section class="section stack">
+    <div>
+      <p class="kicker">Working Rules</p>
+      <h2>New pages should start from the Example scaffold.</h2>
+    </div>
+    <div class="grid-2 grid">
+      <Card title="Home and Example first" eyebrow="Default page model">
+        Keep baseline projects to Home and Example so composition stays consistent and easy to manage.
+      </Card>
+      <Card title="Add pages intentionally" eyebrow="Copy the scaffold">
+        When a project needs extra pages, start from the Example structure and replace content blocks.
+      </Card>
+    </div>
+  </section>
+</BaseLayout>
