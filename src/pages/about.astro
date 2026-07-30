@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import TimelineItem from '../components/ui/TimelineItem.astro';
+import InfoBlock from '../components/ui/InfoBlock.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="About | Carol I. Zacheiss, Attorney at Law"
+  description="34 years of criminal defense experience serving Hopewell, Prince George, and Petersburg, Virginia."
+>
+  <section class="section stack">
+    <p class="kicker">About</p>
+    <h1>Meet Carol I. Zacheiss.</h1>
+    <p class="hero-copy">
+      Carol has spent 34 years practicing criminal law, first as a prosecutor and, for decades
+      since, as defense counsel &mdash; experience she now brings to every client she represents.
+    </p>
+  </section>
+
+  <section class="section section--panel stack">
+    <div class="stack">
+      <p class="hero-copy">
+        Carol was raised in the New York metropolitan area and began her legal career as a
+        prosecutor in Brooklyn and the Bronx, where she spent her first seven years in the
+        courtroom.
+      </p>
+      <p class="hero-copy">
+        After relocating to the Richmond, Virginia area, she continued as a prosecutor with the
+        Richmond City Commonwealth&rsquo;s Attorney&rsquo;s Office, handling violent crime cases
+        &mdash; including robberies and firearm possession charges &mdash; and serving on the
+        office&rsquo;s Domestic Violence Team.
+      </p>
+      <p class="hero-copy">
+        That experience shaped what came next. Carol joined the Petersburg Public Defender&rsquo;s
+        Office, drawn to representing people facing serious charges who might otherwise go without
+        strong representation, and later helped open two new Public Defender&rsquo;s Offices in
+        the Tidewater region before entering private practice.
+      </p>
+      <p class="hero-copy">
+        Today, Carol&rsquo;s practice is devoted exclusively to criminal defense. She has deep
+        experience with drug crime and firearms charges, Fourth Amendment search-and-seizure
+        issues, criminal record expungement, restoration of gun rights, and protective order
+        matters &mdash; representing clients throughout Hopewell, Prince George, and Petersburg.
+      </p>
+      <p class="hero-copy">
+        Outside the office, Carol spends her time with family and friends, her two working dogs,
+        and pursuits that keep her grounded &mdash; traveling, swimming, reading, cooking,
+        gardening, and animal rescue.
+      </p>
+    </div>
+  </section>
+
+  <section class="section stack">
+    <div>
+      <p class="kicker">Experience</p>
+      <h2>34 years, both sides of the courtroom.</h2>
+    </div>
+    <ol class="timeline">
+      <TimelineItem eyebrow="Early Career" title="Prosecutor in Brooklyn and the Bronx">
+        Carol began her 34-year legal career as a prosecutor in the New York metropolitan area,
+        spending her first seven years in the courtroom.
+      </TimelineItem>
+      <TimelineItem eyebrow="Richmond, Virginia" title="Prosecutor, Richmond City Commonwealth's Attorney's Office">
+        After relocating to Virginia, Carol prosecuted violent crime cases, including robberies and
+        firearm possession charges, and served on the office's Domestic Violence Team.
+      </TimelineItem>
+      <TimelineItem eyebrow="Petersburg" title="Petersburg Public Defender's Office">
+        Carol moved to public defense to represent people facing serious charges who needed strong
+        representation.
+      </TimelineItem>
+      <TimelineItem eyebrow="Tidewater" title="Helped open two new Public Defender's Offices">
+        Carol helped launch two new Public Defender's Offices in the Tidewater region.
+      </TimelineItem>
+      <TimelineItem eyebrow="Today" title="Private criminal defense practice">
+        Now in private practice, Carol represents clients across Hopewell, Prince George, and
+        Petersburg &mdash; focused exclusively on criminal defense.
+      </TimelineItem>
+    </ol>
+  </section>
+
+  <section class="section section--dark grid-2 grid">
+    <InfoBlock label="Focus">
+      <span class="inline-icon">
+        <Icon name="scale" />A practice dedicated exclusively to criminal defense &mdash; no civil
+        law of any kind.
+      </span>
+    </InfoBlock>
+    <InfoBlock label="Service Area">
+      <span class="inline-icon">
+        <Icon name="landmark" />Hopewell, Prince George, and Petersburg, Virginia
+      </span>
+    </InfoBlock>
+  </section>
+
+  <section class="section section--frame stack">
+    <span class="panel-icon"><Icon name="phone-call" /></span>
+    <h2>Facing a criminal charge?</h2>
+    <div class="hero-actions">
+      <Button href="/contact" variant="solid">Request a Consultation</Button>
+    </div>
+  </section>
+</BaseLayout>

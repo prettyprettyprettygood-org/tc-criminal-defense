@@ -1,56 +1,125 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
+import FeatureItem from '../components/ui/FeatureItem.astro';
+import InfoBlock from '../components/ui/InfoBlock.astro';
+import Icon from '../components/ui/Icon.astro';
+import { SITE } from '../config/site';
 ---
 
 <BaseLayout
-  title="Astro Project Template"
-  description="Reusable Astro starter for accessible, mission-first websites with strong defaults."
+  title="Carol I. Zacheiss, Attorney at Law | Tri-Cities Criminal Defense"
+  description="Criminal defense attorney serving Hopewell, Prince George, and Petersburg, Virginia, with 34 years of experience."
 >
-  <section class="section hero stack">
-    <p class="kicker">Home Page Template</p>
-    <h1>Use this as your primary project canvas.</h1>
-    <p class="hero-copy">
-      Keep this page focused on your client story. For building and naming reusable pieces, use the
-      Example page component catalog.
-    </p>
+  <section class="section hero grid-2 grid">
+    <div class="stack">
+      <p class="kicker">Criminal Defense Attorney &mdash; Tri-Cities, Virginia</p>
+      <h1>Three decades of trusted criminal defense.</h1>
+      <p class="hero-copy">
+        Carol I. Zacheiss has spent 34 years practicing criminal law &mdash; as a prosecutor in New
+        York and Virginia, and for decades since, as defense counsel. Her practice today is devoted
+        exclusively to criminal defense for clients across the Tri-Cities.
+      </p>
+      <div class="hero-actions">
+        <Button href="/contact" variant="solid">Request a Consultation</Button>
+        <Button href="/practice-areas" variant="outline">See Practice Areas</Button>
+      </div>
+    </div>
+    <img
+      src="/images/law-firm.jpg"
+      alt="Bronze statue of Lady Justice holding a set of scales"
+      style="border-radius: var(--radius-lg); box-shadow: var(--shadow-surface); object-fit: cover; width: 100%; height: 100%;"
+    />
+  </section>
+
+  <section class="section section--dark stack">
+    <ul class="feature-row feature-row--center">
+      <FeatureItem title="34 Years of Experience">
+        <Icon name="award" slot="icon" />
+        Decades of courtroom experience, first as a prosecutor and now as defense counsel.
+      </FeatureItem>
+      <FeatureItem title="Tri-Cities Focused">
+        <Icon name="map-pin" slot="icon" />
+        Proudly serving Hopewell, Prince George, and Petersburg, Virginia.
+      </FeatureItem>
+      <FeatureItem title="Criminal Defense Only">
+        <Icon name="scale" slot="icon" />
+        A practice dedicated exclusively to criminal defense &mdash; no civil matters.
+      </FeatureItem>
+    </ul>
+  </section>
+
+  <section class="section stack">
+    <div>
+      <p class="kicker">Practice Areas</p>
+      <h2>Focused criminal defense representation.</h2>
+      <p class="hero-copy">
+        A sample of Carol's focus areas &mdash; see the full list on the Practice Areas page.
+      </p>
+    </div>
+    <ul class="feature-row">
+      <FeatureItem title="Drug Crime Defense" class="feature-item--framed">
+        <Icon name="flask-conical" slot="icon" />
+        Representation for drug possession, distribution, and related charges.
+      </FeatureItem>
+      <FeatureItem title="Firearms & Weapons Charges" class="feature-item--framed">
+        <Icon name="shield-alert" slot="icon" />
+        Defense grounded in years of experience with firearms cases from both sides of the
+        courtroom.
+      </FeatureItem>
+      <FeatureItem title="Fourth Amendment Defense" class="feature-item--framed">
+        <Icon name="search" slot="icon" />
+        Challenging unlawful searches, stops, and seizures.
+      </FeatureItem>
+      <FeatureItem title="Criminal Record Expungement" class="feature-item--framed">
+        <Icon name="eraser" slot="icon" />
+        Helping eligible clients petition to clear past charges from their record.
+      </FeatureItem>
+    </ul>
     <div class="hero-actions">
-      <Button href="/example" variant="outline">Open Example page</Button>
-      <Button type="button" variant="ghost">Replace this hero copy</Button>
+      <Button href="/practice-areas" variant="outline">View All Practice Areas</Button>
     </div>
   </section>
 
-  <section class="section stack">
-    <div>
-      <p class="kicker">Content Structure</p>
-      <h2>Keep section rhythm consistent on every page.</h2>
+  <section class="section section--panel grid-2 grid">
+    <div class="stack">
+      <p class="kicker">About</p>
+      <h2>34 years of dedicated criminal defense.</h2>
+      <p class="hero-copy">
+        Carol began her career as a prosecutor in Brooklyn and the Bronx, then in Richmond, before
+        moving to public defense in Petersburg and the Tidewater region. That experience on both
+        sides of the courtroom now shapes how she defends her clients.
+      </p>
+      <div class="hero-actions">
+        <Button href="/about" variant="outline">Meet Carol I. Zacheiss</Button>
+      </div>
     </div>
-    <div class="grid-3 grid">
-      <Card title="Section spacing" eyebrow="Use shared tokens">
-        Reuse the same section wrapper spacing so every page feels consistent and intentional.
-      </Card>
-      <Card title="Component reuse" eyebrow="No one-off markup">
-        Build pages by arranging shared components from the Example page catalog.
-      </Card>
-      <Card title="Responsive flow" eyebrow="Mobile-first behavior">
-        Keep content stacking predictable by using the approved layout and grid classes.
-      </Card>
+    <div class="stack">
+      <InfoBlock label="Service Area">
+        <span class="inline-icon"><Icon name="landmark" />Hopewell, Prince George, and Petersburg, Virginia</span>
+      </InfoBlock>
+      <InfoBlock label="Focus">
+        <span class="inline-icon"><Icon name="scale" />Criminal defense exclusively &mdash; no civil matters</span>
+      </InfoBlock>
+      <InfoBlock label="Experience">
+        <span class="inline-icon"><Icon name="award" />34 years practicing law</span>
+      </InfoBlock>
     </div>
   </section>
 
-  <section class="section stack">
+  <section class="section section--frame stack">
+    <span class="panel-icon"><Icon name="phone-call" /></span>
     <div>
-      <p class="kicker">Working Rules</p>
-      <h2>New pages should start from the Example scaffold.</h2>
+      <p class="kicker">Get Started</p>
+      <h2>Facing a criminal charge? Let's talk.</h2>
+      <p class="hero-copy">
+        Carol offers direct, experienced counsel for clients throughout Hopewell, Prince George,
+        and Petersburg.
+      </p>
     </div>
-    <div class="grid-2 grid">
-      <Card title="Home and Example first" eyebrow="Default page model">
-        Keep baseline projects to Home and Example so composition stays consistent and easy to manage.
-      </Card>
-      <Card title="Add pages intentionally" eyebrow="Copy the scaffold">
-        When a project needs extra pages, start from the Example structure and replace content blocks.
-      </Card>
+    <div class="hero-actions">
+      <Button href="/contact" variant="solid">Request a Consultation</Button>
+      <Button href={SITE.phoneHref} variant="outline">Call {SITE.phone}</Button>
     </div>
   </section>
 </BaseLayout>

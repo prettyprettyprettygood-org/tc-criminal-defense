@@ -1,13 +1,24 @@
+// See docs/SITE_PLAN.md Section 6 for the remaining inputs still needed from the client
+// (office address, email, bar admission year).
 export const SITE = {
-  name: 'Community Web Template',
-  shortName: 'Template',
-  description: 'A reusable Astro starter for accessible, maintainable, mission-driven websites.',
+  name: 'Carol I. Zacheiss, Attorney at Law',
+  shortName: 'Carol Zacheiss',
+  description:
+    'Criminal defense attorney serving Hopewell, Prince George, and Petersburg, Virginia, with 34 years of experience.',
   nav: [
     { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/practice-areas', label: 'Practice Areas' },
+    { href: '/contact', label: 'Contact' },
   ],
   footerLinks: [
     { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/practice-areas', label: 'Practice Areas' },
+    { href: '/contact', label: 'Contact' },
   ],
-  contactEmail: 'hello@example.org',
-  yearStarted: 2026,
+  contactEmail: 'contact@example.com',
+  phone: '(804) 437-7718',
+  phoneHref: 'tel:+18044377718',
+  yearStarted: 1992,
 } as const;

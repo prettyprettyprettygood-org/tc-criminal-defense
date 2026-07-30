@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import FeatureItem from '../components/ui/FeatureItem.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Practice Areas | Carol I. Zacheiss, Attorney at Law"
+  description="Criminal defense representation for clients across Hopewell, Prince George, and Petersburg, Virginia."
+>
+  <section class="section stack">
+    <p class="kicker">Practice Areas</p>
+    <h1>A practice dedicated exclusively to criminal defense.</h1>
+    <p class="hero-copy">
+      Carol's practice handles criminal defense matters only &mdash; no civil law of any kind. Her
+      background as both a prosecutor and a public defender informs how she approaches every case
+      below.
+    </p>
+  </section>
+
+  <section class="section section--panel stack">
+    <ul class="feature-row">
+      <FeatureItem title="Drug Crime Defense" class="feature-item--framed">
+        <Icon name="flask-conical" slot="icon" />
+        Representation for drug possession, distribution, and related charges.
+      </FeatureItem>
+      <FeatureItem title="Firearms & Weapons Charges" class="feature-item--framed">
+        <Icon name="shield-alert" slot="icon" />
+        Defense for firearm possession and weapons charges, informed by Carol's background
+        prosecuting these cases.
+      </FeatureItem>
+      <FeatureItem title="Fourth Amendment / Search & Seizure Defense" class="feature-item--framed">
+        <Icon name="search" slot="icon" />
+        Challenging unlawful searches, stops, and seizures that led to criminal charges.
+      </FeatureItem>
+      <FeatureItem title="Criminal Record Expungement" class="feature-item--framed">
+        <Icon name="eraser" slot="icon" />
+        Helping eligible clients petition to expunge past criminal charges from their record.
+      </FeatureItem>
+      <FeatureItem
+        title="Gun Rights Restoration & Concealed Carry Permit Appeals"
+        class="feature-item--framed"
+      >
+        <Icon name="badge-check" slot="icon" />
+        Restoring firearm rights and appealing denied concealed carry permits.
+      </FeatureItem>
+      <FeatureItem title="Protective & Restraining Order Matters" class="feature-item--framed">
+        <Icon name="shield-check" slot="icon" />
+        Representation in protective and restraining order proceedings.
+      </FeatureItem>
+      <FeatureItem title="General Criminal Defense" class="feature-item--framed">
+        <Icon name="gavel" slot="icon" />
+        Defense across the range of criminal charges, from misdemeanors to serious felonies.
+      </FeatureItem>
+    </ul>
+  </section>
+
+  <section class="section section--frame stack">
+    <span class="panel-icon"><Icon name="phone-call" /></span>
+    <h2>Discuss your case.</h2>
+    <div class="hero-actions">
+      <Button href="/contact" variant="solid">Request a Consultation</Button>
+    </div>
+  </section>
+</BaseLayout>

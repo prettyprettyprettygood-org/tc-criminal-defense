@@ -1,6 +1,6 @@
 :root {
   --font-body: system-ui, sans-serif;
-  --font-display: system-ui, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
 
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -9,27 +9,34 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
 
   --radius-sm: 0.4rem;
   --radius-md: 0.85rem;
   --radius-lg: 1.25rem;
   --radius-pill: 999px;
 
-  --shadow-surface: 0 12px 28px rgb(26 35 20 / 0.08);
+  --shadow-surface: 0 12px 28px rgb(15 25 40 / 0.1);
 
-  --tone-bg: #f4f3ea;
-  --tone-bg-accent: #e6efd9;
-  --tone-surface: #fffdf5;
-  --tone-surface-strong: #f1efe3;
-  --tone-text: #1f2a1d;
-  --tone-text-muted: #5a6658;
-  --tone-border: #788e67;
-  --tone-primary: #2f7d4b;
-  --tone-primary-hover: #24623a;
-  --tone-primary-contrast: #f7fff9;
-  --tone-secondary: #245f99;
-  --tone-accent: #8f4d22;
-  --tone-ring: #245f99;
+  --tone-bg: #f6f6f4;
+  --tone-bg-accent: #e6ecf2;
+  --tone-surface: #ffffff;
+  --tone-surface-strong: #eef1f5;
+  --tone-text: #16202b;
+  --tone-text-muted: #55606b;
+  --tone-border: #7c8a99;
+  --tone-primary: #16324f;
+  --tone-primary-hover: #0e2136;
+  --tone-primary-contrast: #ffffff;
+  --tone-secondary: #2c5d8f;
+  --tone-accent: #8a6a22;
+  /* Lightened brass for use as accent text on dark navy surfaces (~7:1 against --tone-primary) —
+     a separate token rather than a runtime mix of --tone-accent, since a custom property cannot
+     reference its own value from within a local override without becoming an invalid cyclic
+     reference. */
+  --tone-accent-on-dark: #cabc9c;
+  --tone-ring: #16324f;
 }
 
 *,
@@ -200,7 +207,7 @@ a {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: var(--space-3);
   flex-wrap: wrap;
 }
@@ -369,12 +376,128 @@ a {
 .section {
   width: min(1120px, 100% - 2rem);
   margin-inline: auto;
-  margin-block: var(--space-16);
+  margin-block: clamp(4rem, 7vw, var(--space-24));
+}
+
+.hero.grid {
+  gap: var(--space-12);
+  align-items: center;
+  padding-block-start: var(--space-6);
+}
+
+/* Full-bleed tinted band behind a section, for visual rhythm between sections.
+   z-index: 0 gives this element its own stacking context so the negative-z-index ::before
+   below stacks relative to it, not the root — otherwise it paints under the (unpositioned)
+   body element's own background instead of behind this section's content. */
+.section--panel {
+  position: relative;
+  z-index: 0;
+  margin-block: 0;
+  padding-block: var(--space-16);
+}
+
+.section--panel::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  inline-size: 100vw;
+  transform: translateX(-50%);
+  background: var(--tone-surface);
+  border-block: 1px solid color-mix(in srgb, var(--tone-border) 55%, transparent);
+  z-index: -1;
+}
+
+/* Full-bleed dark navy band for strong visual punctuation between sections. Redefines the
+   tone-* text/border/ring tokens locally so every themed component (buttons, InfoBlock,
+   FeatureItem, kicker) inherits correct, WCAG-safe contrast automatically without overrides. */
+.section--dark {
+  --tone-text: var(--tone-primary-contrast);
+  --tone-text-muted: color-mix(in srgb, var(--tone-primary-contrast) 74%, var(--tone-primary));
+  --tone-border: color-mix(in srgb, var(--tone-primary-contrast) 45%, var(--tone-primary));
+  --tone-accent: var(--tone-accent-on-dark);
+  --tone-ring: var(--tone-primary-contrast);
+  position: relative;
+  z-index: 0;
+  margin-block: 0;
+  padding-block: var(--space-16);
+  color: var(--tone-text);
+}
+
+.section--dark::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  inline-size: 100vw;
+  transform: translateX(-50%);
+  background: var(--tone-primary);
+  z-index: -1;
+}
+
+.section--dark .feature-item-icon {
+  background: color-mix(in srgb, var(--tone-primary-contrast) 16%, transparent);
+  color: var(--tone-primary-contrast);
+}
+
+.section--dark .btn-solid {
+  background: var(--tone-primary-contrast);
+  color: var(--tone-primary);
+}
+
+.section--dark .btn-solid:hover {
+  background: color-mix(in srgb, var(--tone-primary-contrast) 88%, transparent);
+}
+
+.section--dark .btn-outline {
+  background: transparent;
+  color: var(--tone-primary-contrast);
+}
+
+.section--dark .btn-outline:hover {
+  border-color: var(--tone-primary-contrast);
+  background: color-mix(in srgb, var(--tone-primary-contrast) 14%, transparent);
+}
+
+.section--dark .inline-icon svg {
+  color: var(--tone-primary-contrast);
+}
+
+/* Elevated, bordered panel treatment for a single section (e.g. a closing CTA). */
+.section--frame {
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-lg);
+  background: var(--tone-surface);
+  box-shadow: var(--shadow-surface);
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  justify-items: center;
+}
+
+.section--frame .hero-copy {
+  margin-inline: auto;
+}
+
+.panel-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--tone-primary) 12%, var(--tone-surface));
+  color: var(--tone-primary);
 }
 
 .stack {
   display: grid;
   gap: var(--space-6);
+  align-content: start;
+}
+
+.stack--center {
+  justify-items: center;
+  text-align: center;
 }
 
 .kicker {
@@ -399,7 +522,7 @@ a {
 
 .grid {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-8);
 }
 
 .grid-2 {
@@ -470,6 +593,7 @@ a {
 }
 
 .card {
+  position: relative;
   border: 1px solid var(--tone-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
@@ -477,6 +601,34 @@ a {
   box-shadow: var(--shadow-surface);
   display: grid;
   gap: var(--space-3);
+}
+
+/* When a card links out, the whole surface is the target (stretched-link pattern) with a
+   visible hover/focus affordance, instead of an underlined title-only link. */
+.card--linked {
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.card--linked:has(.card-link:hover),
+.card--linked:has(.card-link:focus-visible) {
+  border-color: color-mix(in srgb, var(--tone-primary) 40%, var(--tone-border));
+  box-shadow: 0 16px 32px rgb(15 25 40 / 0.14);
+  transform: translateY(-2px);
+}
+
+.card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .card-eyebrow {
@@ -489,11 +641,6 @@ a {
 
 .card-title {
   margin: 0;
-}
-
-.card-title a {
-  text-decoration-color: color-mix(in srgb, var(--tone-accent) 70%, transparent);
-  text-decoration-thickness: 2px;
 }
 
 .card-body {
@@ -509,12 +656,60 @@ a {
   gap: var(--space-6);
 }
 
+.feature-row--center {
+  justify-content: center;
+  text-align: left;
+}
+
 .feature-item {
+  flex: 1 1 14rem;
+  min-width: 14rem;
+}
+
+.feature-item:not(.feature-item--linked) {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  flex: 1 1 14rem;
-  min-width: 14rem;
+}
+
+/* Static card treatment for dense grids of non-interactive tiles (e.g. a practice-area list). */
+.feature-item--framed {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--radius-md);
+  background: var(--tone-surface);
+  box-shadow: var(--shadow-surface);
+}
+
+/* Whole-tile link surface: the entire tile is the click/tap target, with a visible
+   hover/focus affordance (border, background, elevation) instead of an underlined title. */
+.feature-item-surface {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-4);
+  margin: calc(var(--space-4) * -1);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.feature-item-surface:hover,
+.feature-item-surface:focus-visible {
+  border-color: var(--tone-border);
+  background: var(--tone-surface);
+  box-shadow: var(--shadow-surface);
+  transform: translateY(-2px);
 }
 
 .feature-item-icon {
@@ -533,6 +728,24 @@ a {
   display: none;
 }
 
+.feature-item-icon svg {
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+}
+
+.inline-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inline-icon svg {
+  flex-shrink: 0;
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+  color: var(--tone-primary);
+}
+
 .feature-item-body {
   display: grid;
   gap: 0.35rem;
@@ -541,11 +754,6 @@ a {
 .feature-item-title {
   margin: 0;
   font-weight: 700;
-}
-
-.feature-item-title a {
-  text-decoration-color: color-mix(in srgb, var(--tone-accent) 70%, transparent);
-  text-decoration-thickness: 2px;
 }
 
 .feature-item-description {
@@ -877,6 +1085,13 @@ a {
     grid-template-columns: 1fr;
     justify-items: start;
     padding-block: var(--space-3);
+  }
+
+  /* Override the inherited justify-items: start — without this the nav shrinks to its
+     content's max-content width instead of the container width, so flex-wrap never
+     engages and the nav links overflow the viewport instead of wrapping. */
+  .site-nav {
+    justify-self: stretch;
   }
 
   .site-nav ul {

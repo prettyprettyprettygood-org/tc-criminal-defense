@@ -7,12 +7,20 @@ interface Props {
 }
 
 const { title, eyebrow, href, class: className = '' } = Astro.props;
+
+const cardClass = `card ${href ? 'card--linked' : ''} ${className}`.trim();
 ---
 
-<article class={`card ${className}`.trim()}>
+<article class={cardClass}>
   {eyebrow && <p class="card-eyebrow">{eyebrow}</p>}
   <h3 class="card-title">
-    {href ? <a href={href}>{title}</a> : title}
+    {href ? (
+      <a href={href} class="card-link">
+        {title}
+      </a>
+    ) : (
+      title
+    )}
   </h3>
   <div class="card-body">
     <slot />

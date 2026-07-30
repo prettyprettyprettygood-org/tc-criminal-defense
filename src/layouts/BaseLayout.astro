@@ -1,15 +1,18 @@
 ---
 import Footer from '../components/layout/Footer.astro';
 import Navbar from '../components/layout/Navbar.astro';
+import { SITE } from '../config/site';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
   hideChrome?: boolean;
 }
 
-const { title, description = '', hideChrome = false } = Astro.props;
+const { title, description = SITE.description, image = '/images/law-firm.jpg', hideChrome = false } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -23,8 +26,20 @@ const { title, description = '', hideChrome = false } = Astro.props;
       document.documentElement.classList.add('js');
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#f4f3ea" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#16324f" />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>

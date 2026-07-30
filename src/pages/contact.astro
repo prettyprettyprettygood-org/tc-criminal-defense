@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import InfoBlock from '../components/ui/InfoBlock.astro';
+import Icon from '../components/ui/Icon.astro';
+import { SITE } from '../config/site';
+---
+
+<BaseLayout
+  title="Contact | Carol I. Zacheiss, Attorney at Law"
+  description="Contact Carol I. Zacheiss for criminal defense representation in Hopewell, Prince George, and Petersburg, Virginia."
+>
+  <section class="section stack">
+    <p class="kicker">Contact</p>
+    <h1>Request a consultation.</h1>
+    <p class="hero-copy">Call or email to discuss your case with Carol I. Zacheiss.</p>
+  </section>
+
+  <section class="section section--panel stack">
+    <div class="grid grid-2">
+      <InfoBlock label="Phone" href={SITE.phoneHref}>
+        <span class="inline-icon"><Icon name="phone" />{SITE.phone}</span>
+      </InfoBlock>
+      <InfoBlock label="Email" href={`mailto:${SITE.contactEmail}`}>
+        <span class="inline-icon"><Icon name="mail" />{SITE.contactEmail}</span>
+      </InfoBlock>
+      <InfoBlock label="Office Address">
+        <span class="inline-icon">
+          <Icon name="map-pin" />[Office Address] &mdash; pending client details
+        </span>
+      </InfoBlock>
+      <InfoBlock label="Service Area">
+        <span class="inline-icon">
+          <Icon name="landmark" />Hopewell, Prince George, and Petersburg, Virginia
+        </span>
+      </InfoBlock>
+    </div>
+    <p class="hero-copy">
+      A live contact form requires backend enablement (see
+      docs/agents/template-maintainer/BACKEND_ENABLEMENT.md) and is not included by default.
+      Phone and email links above are the day-one contact method.
+    </p>
+  </section>
+
+  <section class="section section--dark stack stack--center">
+    <span class="panel-icon"><Icon name="phone-call" /></span>
+    <div>
+      <p class="kicker">Prefer to Call?</p>
+      <h2>Carol is ready to discuss your case.</h2>
+    </div>
+    <div class="hero-actions">
+      <Button href={SITE.phoneHref} variant="solid">Call {SITE.phone}</Button>
+    </div>
+  </section>
+</BaseLayout>
