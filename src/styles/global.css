@@ -520,6 +520,10 @@ a {
   gap: var(--space-3);
 }
 
+.hero-actions--center {
+  justify-content: center;
+}
+
 .grid {
   display: grid;
   gap: var(--space-8);
@@ -672,16 +676,40 @@ a {
   gap: var(--space-3);
 }
 
-/* Static card treatment for dense grids of non-interactive tiles (e.g. a practice-area list). */
-.feature-item--framed {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-6);
+/* Static card treatment for dense grids of non-interactive tiles (e.g. a practice-area list).
+   Icon-on-top, centered layout keeps every card visually anchored regardless of how much
+   the title/description copy wraps (unlike an icon-left row, which strands the icon next to
+   whichever card has the longest description). */
+.feature-item.feature-item--framed {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-6);
   border: 1px solid var(--tone-border);
   border-radius: var(--radius-md);
   background: var(--tone-surface);
   box-shadow: var(--shadow-surface);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.feature-item.feature-item--framed:hover {
+  border-color: color-mix(in srgb, var(--tone-primary) 35%, var(--tone-border));
+  box-shadow: 0 16px 32px rgb(15 25 40 / 0.14);
+  transform: translateY(-2px);
+}
+
+.feature-item--framed .feature-item-icon {
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+}
+
+.feature-item--framed:hover .feature-item-icon {
+  background: var(--tone-primary);
+  color: var(--tone-primary-contrast);
 }
 
 /* Whole-tile link surface: the entire tile is the click/tap target, with a visible
@@ -722,6 +750,9 @@ a {
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--tone-primary) 12%, var(--tone-surface));
   color: var(--tone-primary);
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .feature-item-icon:empty {
@@ -839,9 +870,7 @@ a {
 .info-block {
   margin: 0;
   display: grid;
-  grid-template-columns: minmax(8rem, 12rem) 1fr;
-  gap: var(--space-2) var(--space-4);
-  align-items: start;
+  gap: var(--space-3);
 }
 
 .info-block-label {
@@ -856,6 +885,9 @@ a {
 .info-block-content {
   margin: 0;
   color: var(--tone-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .info-block-content a {
@@ -1050,34 +1082,108 @@ a {
 }
 
 .site-footer-inner {
-  min-height: 8rem;
-  padding-block: var(--space-6);
+  padding-block: var(--space-8);
   display: grid;
   align-items: center;
-  gap: var(--space-4);
-  grid-template-columns: 1fr auto auto;
+  gap: var(--space-6);
+  grid-template-columns: 1fr auto 1fr;
 }
 
-.footer-copy {
+.footer-col {
   display: grid;
-  gap: 0.2rem;
+  gap: var(--space-3);
+}
+
+.footer-col--brand {
+  justify-items: start;
+}
+
+.footer-col--center {
+  justify-items: center;
+  text-align: center;
+  gap: var(--space-2);
+}
+
+.footer-col--end {
+  justify-items: end;
+}
+
+.footer-contact-list {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.footer-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   color: var(--tone-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-contact:hover {
+  color: var(--tone-text);
 }
 
 .footer-links {
   list-style: none;
   display: flex;
-  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-4);
   margin: 0;
   padding: 0;
 }
 
 .footer-links a {
   color: var(--tone-text-muted);
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.footer-contact {
+.footer-links a:hover {
+  color: var(--tone-text);
+}
+
+.footer-meta {
+  color: var(--tone-text-muted);
+  font-size: 0.85rem;
+}
+
+.footer-meta a {
+  color: var(--tone-text-muted);
   font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.footer-meta a:hover {
+  color: var(--tone-text);
+}
+
+.footer-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--tone-border);
+  background: var(--tone-surface);
+  color: var(--tone-text-muted);
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease;
+}
+
+.footer-back-to-top:hover {
+  border-color: var(--tone-secondary);
+  color: var(--tone-primary);
+  transform: translateY(-2px);
 }
 
 @media (width <= 960px) {
@@ -1106,13 +1212,26 @@ a {
 
   .grid-2,
   .grid-3,
-  .intake-form__grid,
-  .info-block {
+  .intake-form__grid {
     grid-template-columns: 1fr;
   }
 
   .site-footer-inner {
     grid-template-columns: 1fr;
-    justify-items: start;
+  }
+
+  .footer-col--center {
+    order: 1;
+  }
+
+  .footer-col--brand {
+    order: 2;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .footer-col--end {
+    order: 3;
+    justify-items: center;
   }
 }
