@@ -11,7 +11,7 @@ Built on the Astro Mission-First Template — see `README.md`, `docs/STANDARDS.m
 
 - Attorney: **Carol I. Zacheiss** — solo criminal defense attorney, **strictly criminal defense,
   no civil law of any kind.** Applied sitewide (nav brand, page titles, footer, metadata).
-- Phone: **(804) 437-7718**. Wired into `src/config/site.ts` (`phone`/`phoneHref`) and used on the
+- Phone: **(804) 352-3550**. Wired into `src/config/site.ts` (`phone`/`phoneHref`) and used on the
   Contact page and Home closing CTA.
 - 34 years practicing (started roughly 1992, as of 2026): 7 years as a prosecutor in Brooklyn and
   the Bronx, NY; prosecutor at the Richmond City Commonwealth's Attorney's Office (violent crime,

@@ -18,7 +18,7 @@ export const SITE = {
     { href: '/contact', label: 'Contact' },
   ],
   contactEmail: 'contact@example.com',
-  phone: '(804) 437-7718',
-  phoneHref: 'tel:+18044377718',
+  phone: '(804) 352-3550',
+  phoneHref: 'tel:+18043523550',
   yearStarted: 1992,
 } as const;

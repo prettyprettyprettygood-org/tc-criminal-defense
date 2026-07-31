@@ -7,7 +7,7 @@ For full question prompts, see docs/PROJECT_BRIEF_TEMPLATE.md and fill out each 
 ## Client Snapshot
 
 - Company/organization name: Carol I. Zacheiss, Attorney at Law
-- Primary contact: Carol I. Zacheiss (solo practitioner, owner) — (804) 437-7718; email/office address still TBD
+- Primary contact: Carol I. Zacheiss (solo practitioner, owner) — (804) 352-3550; email/office address still TBD
 - Industry or domain: Criminal defense law practice (solo attorney, 34 years practicing; no civil law)
 - One-sentence mission: Provide experienced, trustworthy criminal defense representation to clients across Virginia's Tri-Cities region.
 - Primary audience: Individuals facing criminal charges (and their families) in Hopewell, Prince George, and Petersburg, VA, searching for experienced defense counsel.
