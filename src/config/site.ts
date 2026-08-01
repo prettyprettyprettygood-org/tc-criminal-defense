@@ -2,7 +2,7 @@
 // (office address, email, bar admission year).
 export const SITE = {
   name: 'Carol I. Zacheiss, Attorney at Law',
-  shortName: 'Carol Zacheiss',
+  shortName: 'Carol I. Zacheiss',
   description:
     'Criminal defense attorney serving Hopewell, Prince George, and Petersburg, Virginia, with 34 years of experience.',
   nav: [
