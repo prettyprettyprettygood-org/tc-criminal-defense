@@ -97,11 +97,11 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  font-size: clamp(2rem, 4vw, 3.25rem);
 }
 
 h2 {
-  font-size: clamp(1.7rem, 3.2vw, 2.7rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
 }
 
 h3 {
@@ -247,6 +247,26 @@ a {
 
 .site-nav a[aria-current='page']::after {
   transform: scaleX(1);
+}
+
+/* Hidden on desktop unconditionally; shown at the mobile breakpoint only via :not([hidden]),
+   so if the enhancement script never runs, the [hidden] attribute keeps it (and the collapsed
+   menu behavior) off and the always-visible nav list below remains the fallback. */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--tone-border);
+  background: var(--tone-surface);
+  color: var(--tone-text);
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  border-color: var(--tone-secondary);
 }
 
 .styled-dropdown {
@@ -436,20 +456,26 @@ a {
   z-index: -1;
 }
 
-/* Full-bleed dark navy band for strong visual punctuation between sections. Redefines the
-   tone-* text/border/ring tokens locally so every themed component (buttons, InfoBlock,
-   FeatureItem, kicker) inherits correct, WCAG-safe contrast automatically without overrides. */
-.section--dark {
+/* Dark navy treatment shared by the full-bleed section band and the boxed panel card below.
+   Redefines the tone-* text/border/ring tokens locally so every themed component (buttons,
+   InfoBlock, FeatureItem, kicker) inherits correct, WCAG-safe contrast automatically without
+   overrides. */
+.section--dark,
+.dark-panel {
   --tone-text: var(--tone-primary-contrast);
   --tone-text-muted: color-mix(in srgb, var(--tone-primary-contrast) 74%, var(--tone-primary));
   --tone-border: color-mix(in srgb, var(--tone-primary-contrast) 45%, var(--tone-primary));
   --tone-accent: var(--tone-accent-on-dark);
   --tone-ring: var(--tone-primary-contrast);
+  color: var(--tone-text);
+}
+
+/* Full-bleed dark navy band for strong visual punctuation between sections. */
+.section--dark {
   position: relative;
   z-index: 0;
   margin-block: 0;
   padding-block: var(--space-16);
-  color: var(--tone-text);
 }
 
 .section--dark::before {
@@ -461,6 +487,14 @@ a {
   transform: translateX(-50%);
   background: var(--tone-primary);
   z-index: -1;
+}
+
+/* Contained dark navy card, e.g. a contact-info panel sitting beside a form. */
+.dark-panel {
+  border-radius: var(--radius-lg);
+  background: var(--tone-primary);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--shadow-surface);
 }
 
 .section--dark .feature-item-icon {
@@ -487,7 +521,8 @@ a {
   background: color-mix(in srgb, var(--tone-primary-contrast) 14%, transparent);
 }
 
-.section--dark .inline-icon svg {
+.section--dark .inline-icon svg,
+.dark-panel .inline-icon svg {
   color: var(--tone-primary-contrast);
 }
 
@@ -497,7 +532,7 @@ a {
   border-radius: var(--radius-lg);
   background: var(--tone-surface);
   box-shadow: var(--shadow-surface);
-  padding: var(--space-16) var(--space-8);
+  padding: clamp(2.25rem, 5vw, var(--space-12)) var(--space-8);
   text-align: center;
   justify-items: center;
 }
@@ -510,16 +545,16 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 4.25rem;
-  block-size: 4.25rem;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--tone-primary) 12%, var(--tone-surface));
   color: var(--tone-primary);
 }
 
 .panel-icon svg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .stack {
@@ -531,6 +566,16 @@ a {
 .stack--center {
   justify-items: center;
   text-align: center;
+}
+
+/* Centers a block of body copy as a narrow column within a wider section, without centering
+   the text itself (paragraphs stay left-aligned/ragged-right for readability). A thin brass
+   accent rule frames the column so the surrounding whitespace reads as intentional, not leftover. */
+.stack--narrow {
+  max-width: 62ch;
+  margin-inline: auto;
+  padding-inline-start: var(--space-6);
+  border-inline-start: 2px solid color-mix(in srgb, var(--tone-accent) 55%, transparent);
 }
 
 .kicker {
@@ -570,6 +615,11 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.contact-grid {
+  grid-template-columns: 1.4fr 1fr;
+  align-items: start;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -582,7 +632,18 @@ a {
   transition:
     background-color 140ms ease,
     color 140ms ease,
-    border-color 140ms ease;
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .btn-sm {
@@ -607,6 +668,7 @@ a {
 
 .btn-solid:hover {
   background: var(--tone-primary-hover);
+  box-shadow: 0 12px 24px rgb(15 25 40 / 0.18);
 }
 
 .btn-outline {
@@ -928,6 +990,17 @@ a {
   text-decoration-thickness: 2px;
 }
 
+/* On the dark panel, pick the labels out in the lightened brass accent and use a thin
+   accent-toned rule to separate stacked entries instead of just gap spacing. */
+.dark-panel .info-block-label {
+  color: var(--tone-accent);
+}
+
+.dark-panel .info-block + .info-block {
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid color-mix(in srgb, var(--tone-accent) 35%, transparent);
+}
+
 .example-tabs {
   display: grid;
   gap: var(--space-6);
@@ -1042,6 +1115,10 @@ a {
 
 .intake-form[hidden] {
   display: none;
+}
+
+.intake-form .hero-actions {
+  justify-content: flex-end;
 }
 
 .intake-form__grid {
@@ -1160,24 +1237,6 @@ a {
   justify-items: end;
 }
 
-.footer-contact-list {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.footer-contact {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--tone-text-muted);
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.footer-contact:hover {
-  color: var(--tone-text);
-}
-
 .footer-links {
   list-style: none;
   display: flex;
@@ -1245,15 +1304,62 @@ a {
     padding-block: var(--space-3);
   }
 
-  /* Override the inherited justify-items: start — without this the nav shrinks to its
-     content's max-content width instead of the container width, so flex-wrap never
+  /* Only narrow the nav column down next to the brand once it's actually enhanced (collapsed
+     behind a hamburger). Until then it keeps the full-width, wrapping fallback below, so a JS
+     failure can't strand the unwrapped nav links in a squeezed auto-sized column. */
+  .site-header-inner:has(.site-nav.is-enhanced) {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  /* Override the inherited justify-items: start — without this the (non-enhanced) nav shrinks
+     to its content's max-content width instead of the container width, so flex-wrap never
      engages and the nav links overflow the viewport instead of wrapping. */
   .site-nav {
     justify-self: stretch;
+    position: relative;
+  }
+
+  .site-nav.is-enhanced {
+    justify-self: end;
   }
 
   .site-nav ul {
     justify-content: start;
+  }
+
+  .nav-toggle:not([hidden]) {
+    display: inline-flex;
+  }
+
+  /* Collapsed behind the hamburger only once the enhancement script has actually attached its
+     listeners (.is-enhanced) — if JS fails, the nav list stays in its normal, always-visible,
+     wrapping layout instead of getting stuck hidden with a non-functional toggle. */
+  .js .site-nav.is-enhanced ul {
+    display: none;
+  }
+
+  .js .site-nav.is-enhanced.is-open ul {
+    display: flex;
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    z-index: 30;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    min-inline-size: 12rem;
+    border: 1px solid var(--tone-border);
+    border-radius: var(--radius-md);
+    background: var(--tone-surface);
+    box-shadow: var(--shadow-surface);
+    padding: 0.4rem;
+  }
+
+  .js .site-nav.is-enhanced.is-open a {
+    display: block;
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--radius-sm);
   }
 
   .styled-dropdown--label-left {
@@ -1264,6 +1370,7 @@ a {
 
   .grid-2,
   .grid-3,
+  .contact-grid,
   .intake-form__grid,
   .hero.grid {
     grid-template-columns: 1fr;

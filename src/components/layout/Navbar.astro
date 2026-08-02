@@ -1,4 +1,5 @@
 ---
+import Icon from '../ui/Icon.astro';
 import { SITE } from '../../config/site';
 
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
@@ -11,8 +12,19 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
       <span class="brand-name">{SITE.shortName}</span>
     </a>
 
-    <nav aria-label="Primary" class="site-nav">
-      <ul>
+    <nav aria-label="Primary" class="site-nav" data-nav>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav-list"
+        aria-label="Toggle navigation menu"
+        data-nav-toggle
+        hidden
+      >
+        <Icon name="menu" size={22} />
+      </button>
+      <ul id="primary-nav-list">
         {
           SITE.nav.map((item) => (
             <li>
@@ -29,3 +41,53 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const nav = document.querySelector('[data-nav]');
+    const toggle = nav?.querySelector('[data-nav-toggle]');
+    const list = nav?.querySelector('ul');
+
+    if (!(nav instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(list instanceof HTMLElement)) {
+      return;
+    }
+
+    const close = () => {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    list.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+      if (!nav.classList.contains('is-open')) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Node) || nav.contains(target)) {
+        return;
+      }
+
+      close();
+    });
+
+    nav.classList.add('is-enhanced');
+    toggle.hidden = false;
+  })();
+</script>

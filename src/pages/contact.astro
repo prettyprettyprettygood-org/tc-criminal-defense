@@ -16,73 +16,76 @@ import { SITE } from '../config/site';
     <p class="hero-copy">Call or email to discuss your case with Carol I. Zacheiss.</p>
   </section>
 
-  <section class="section section--panel stack">
-    <div class="grid grid-2">
-      <InfoBlock label="Phone" href={SITE.phoneHref}>
-        <span class="inline-icon"><Icon name="phone" />{SITE.phone}</span>
-      </InfoBlock>
-      <InfoBlock label="Email" href={`mailto:${SITE.contactEmail}`}>
-        <span class="inline-icon"><Icon name="mail" />{SITE.contactEmail}</span>
-      </InfoBlock>
-      <InfoBlock label="Fax">
-        <span class="inline-icon"><Icon name="printer" />{SITE.fax}</span>
-      </InfoBlock>
-      <InfoBlock label="Service Area">
-        <span class="inline-icon">
-          <Icon name="landmark" />Hopewell, Prince George, and Petersburg, Virginia
-        </span>
-      </InfoBlock>
-    </div>
-  </section>
+  <section class="section section--panel">
+    <div class="grid contact-grid">
+      <div class="stack" id="contact-form">
+        <div class="stack">
+          <p class="kicker">Send a Message</p>
+          <h2>Prefer to write? Send your details below.</h2>
+          <p class="hero-copy">
+            Fill out the form and Carol's office will follow up to schedule your consultation.
+          </p>
+        </div>
 
-  <section class="section stack" id="contact-form">
-    <div class="stack">
-      <p class="kicker">Send a Message</p>
-      <h2>Prefer to write? Send your details below.</h2>
-      <p class="hero-copy">
-        Fill out the form and Carol's office will follow up to schedule your consultation.
-      </p>
-    </div>
+        <p class="form-success" role="status" data-form-success hidden>
+          Thanks &mdash; your message has been sent. Carol's office will be in touch soon.
+        </p>
+        <p class="form-error" role="alert" data-form-error hidden>
+          Something went wrong sending your message. Please call or email instead.
+        </p>
 
-    <p class="form-success" role="status" data-form-success hidden>
-      Thanks &mdash; your message has been sent. Carol's office will be in touch soon.
-    </p>
-    <p class="form-error" role="alert" data-form-error hidden>
-      Something went wrong sending your message. Please call or email instead.
-    </p>
-
-    <form class="intake-form" method="POST" action="https://formspree.io/f/xeeybprq" data-contact-form>
-      <div class="intake-form__grid">
-        <label class="intake-form__field">
-          <span>Full Name</span>
-          <input type="text" name="name" autocomplete="name" required />
-        </label>
-        <label class="intake-form__field">
-          <span>Email</span>
-          <input type="email" name="email" autocomplete="email" required />
-        </label>
-        <label class="intake-form__field intake-form__field--full">
-          <span>Phone</span>
-          <input type="tel" name="phone" autocomplete="tel" />
-        </label>
-        <label class="intake-form__field intake-form__field--full">
-          <span>How can we help?</span>
-          <textarea name="message" rows="5" required></textarea>
-        </label>
+        <form class="intake-form" method="POST" action="https://formspree.io/f/xeeybprq" data-contact-form>
+          <div class="intake-form__grid">
+            <label class="intake-form__field">
+              <span>Full Name</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="intake-form__field">
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label class="intake-form__field intake-form__field--full">
+              <span>Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" />
+            </label>
+            <label class="intake-form__field intake-form__field--full">
+              <span>How can we help?</span>
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+          </div>
+          <input type="hidden" name="_subject" value="New consultation request — tricitiescriminallaw.com" />
+          <input
+            type="text"
+            name="_gotcha"
+            class="visually-hidden"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <div class="hero-actions">
+            <Button type="submit" variant="solid">Send Message</Button>
+          </div>
+        </form>
       </div>
-      <input type="hidden" name="_subject" value="New consultation request — tricitiescriminallaw.com" />
-      <input
-        type="text"
-        name="_gotcha"
-        class="visually-hidden"
-        tabindex="-1"
-        autocomplete="off"
-        aria-hidden="true"
-      />
-      <div class="hero-actions">
-        <Button type="submit" variant="solid">Send Message</Button>
+
+      <div class="dark-panel stack">
+        <p class="kicker">Direct Contact</p>
+        <InfoBlock label="Phone" href={SITE.phoneHref}>
+          <span class="inline-icon"><Icon name="phone" />{SITE.phone}</span>
+        </InfoBlock>
+        <InfoBlock label="Fax">
+          <span class="inline-icon"><Icon name="printer" />{SITE.fax}</span>
+        </InfoBlock>
+        <InfoBlock label="Email" href={`mailto:${SITE.contactEmail}`}>
+          <span class="inline-icon"><Icon name="mail" />{SITE.contactEmail}</span>
+        </InfoBlock>
+        <InfoBlock label="Service Area">
+          <span class="inline-icon">
+            <Icon name="landmark" />Hopewell, Prince George, and Petersburg, Virginia
+          </span>
+        </InfoBlock>
       </div>
-    </form>
+    </div>
   </section>
 
   <script>
