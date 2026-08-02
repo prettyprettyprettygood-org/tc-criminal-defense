@@ -13,6 +13,20 @@ interface Props {
 
 const { title, description = SITE.description, image = '/images/law-firm.jpg', hideChrome = false } =
   Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const absoluteImageURL = new URL(image, Astro.site);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Attorney',
+  name: SITE.name,
+  description: SITE.description,
+  url: Astro.site?.toString(),
+  image: absoluteImageURL.toString(),
+  telephone: SITE.phone,
+  areaServed: ['Hopewell, VA', 'Prince George, VA', 'Petersburg, VA'],
+};
 ---
 
 <!doctype html>
@@ -21,6 +35,7 @@ const { title, description = SITE.description, image = '/images/law-firm.jpg', h
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <script is:inline>
       document.documentElement.classList.remove('no-js');
       document.documentElement.classList.add('js');
@@ -28,18 +43,21 @@ const { title, description = SITE.description, image = '/images/law-firm.jpg', h
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#16324f" />
+    <meta name="theme-color" content="#11234a" />
     <title>{title}</title>
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={absoluteImageURL} />
+    <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={absoluteImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>

@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "tc-criminal-defense",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -23,6 +23,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.1.4"
   },
   "devDependencies": {

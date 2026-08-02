@@ -54,12 +54,12 @@ same; only values change, per the "no hard-coded component colors" rule in `docs
 | `--tone-text` | `#16202b` | Body/heading text — near-black navy-charcoal |
 | `--tone-text-muted` | `#55606b` | Secondary text |
 | `--tone-border` | `#7c8a99` | Hairlines, card/input borders |
-| `--tone-primary` | `#16324f` | Dark navy — matches business cards; primary buttons, brand |
-| `--tone-primary-hover` | `#0e2136` | Navy hover state |
+| `--tone-primary` | `#11234a` | Navy — primary buttons, brand |
+| `--tone-primary-hover` | `#0a1633` | Navy hover state |
 | `--tone-primary-contrast` | `#ffffff` | Text on navy |
-| `--tone-secondary` | `#2c5d8f` | Lighter steel blue — links, secondary emphasis |
+| `--tone-secondary` | `#274c86` | Lighter navy blue — links, secondary emphasis |
 | `--tone-accent` | `#8a6a22` | Muted brass/gold — kickers, small accents only, used sparingly |
-| `--tone-ring` | `#16324f` | Focus ring |
+| `--tone-ring` | `#11234a` | Focus ring |
 
 Applied to `src/styles/global.css`. Contrast checked against WCAG 2.2 AA (relative-luminance
 formula): body text ~15:1, muted text ~5.9:1, brass-gold kicker text ~4.66:1 (clears the 4.5:1
@@ -216,10 +216,15 @@ Follow-up polish pass on top of the initial build:
   Used in the `FeatureItem` icon slot (credibility strip, both Practice Areas grids) and inline
   next to Contact page `InfoBlock` text (new `.inline-icon` utility class).
 - **Navbar**: nav links now right-align (`justify-content: flex-end` instead of `center`).
-- **Meta/OG**: `BaseLayout.astro` now emits Open Graph and Twitter Card tags (title, description,
-  `og:image` defaulting to `law-firm.jpg`, `og:site_name` from `SITE.name`). `og:image`/
-  `twitter:image` are currently relative paths — convert to absolute URLs once the production
-  domain is set (Operations section of `PROJECT_BRIEF.md` still lists hosting as TBD).
+- **Meta/OG**: `BaseLayout.astro` emits Open Graph and Twitter Card tags (title, description,
+  `og:image` defaulting to `law-firm.jpg`, `og:site_name` from `SITE.name`), plus a canonical
+  link and `og:url`. Now that the production domain (tricitiescriminallaw.com) is set as `site`
+  in `astro.config.mjs`, `og:image`/`twitter:image`/canonical all resolve to absolute URLs.
+- **Sitemap/robots**: `@astrojs/sitemap` generates `sitemap-index.xml` on build (excludes
+  `/example`); `public/robots.txt` points crawlers at it and disallows `/example`.
+- **Structured data**: `BaseLayout.astro` emits an `Attorney` JSON-LD block (name, description,
+  phone, service area, image) on every page. No `address` yet — add a `PostalAddress` once the
+  office address is confirmed by the client (still TBD, see `PROJECT_BRIEF.md`).
 - **Favicon**: replaced the generic template mark with a navy rounded-square badge containing a
   white scales-of-justice glyph (`public/favicon.svg`), plus regenerated `public/favicon.ico`
   (multi-size) and added `public/apple-touch-icon.png` (180×180) to match.

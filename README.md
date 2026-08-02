@@ -1,19 +1,12 @@
-# Astro Mission-First Template
+# Carol I. Zacheiss, Attorney at Law
 
-Reusable Astro starter for nonprofits and organizations doing public-good work.
+Marketing site for Carol I. Zacheiss, a criminal defense attorney serving Hopewell, Prince George, and Petersburg, Virginia.
 
-This template is static-first, accessibility-first, and designed to be cloned for new projects with minimal setup.
+**Live:** https://tricitiescriminallaw.com (hosted on Vercel)
 
-## Purpose
-
-- Ship maintainable static websites quickly.
-- Preserve high quality standards on every project.
-- Keep cloned projects focused on content, layout, tokens, and accessibility.
-- Provide agent-ready docs with clear rules for template maintenance vs cloned-site editing.
+This site was built from an internal Astro starter template, then customized for this client. It's now a standalone project — changes here are specific to this client, not reusable template work.
 
 ## Standards
-
-All projects cloned from this template must follow:
 
 - WCAG 2.2 AA baseline.
 - Full keyboard navigation and visible focus styles.
@@ -25,35 +18,16 @@ Reference docs:
 
 - docs/STANDARDS.md
 - docs/WCAG_2.2_CHECKLIST.md
-- docs/AGENT_PROMPT_OPENERS.md
-- docs/AGENT_QUICKSTART.md
-- docs/agents/template-maintainer/README.md
+- docs/SITE_PLAN.md
 - docs/agents/site-builder/README.md
-- docs/agents/template-maintainer/ACCESSIBILITY_AUDIT_NOTE.md
-- docs/agents/template-maintainer/BACKEND_ENABLEMENT.md
-
-## Create New Projects From This Template (GitHub)
-
-1. Open this repository on GitHub.
-2. Click Use this template.
-3. Select Create a new repository.
-4. Choose owner, repository name, and visibility.
-5. Leave Include all branches unchecked unless you intentionally want every branch copied.
-6. Click Create repository from template.
-
-Notes:
-
-- A repository created from a template starts with unrelated history.
-- Use this template repo as your source of truth, then do client work in newly generated repos.
+- PROJECT_BRIEF.md (client scope, contacts, and open items)
 
 ## Local Quick Start
 
 1. Clone this repository.
-2. Rename the local folder to your new project name.
-3. Update package metadata in package.json.
-4. Install dependencies.
-5. Start development server.
-6. Confirm git hooks are installed for commit-time checks.
+2. Install dependencies.
+3. Start the development server.
+4. Confirm git hooks are installed for commit-time checks.
 
 Commands:
 
@@ -75,13 +49,18 @@ CI:
 
 ## Commit Guardrails (Solo Main Workflow)
 
-This template installs a local pre-commit hook from `.githooks/pre-commit`.
+This repo installs a local pre-commit hook from `.githooks/pre-commit`.
 
 - Hook command: `npm run precommit:check`
 - Checks run on commit: typecheck, lint, tests
 - Manual install/reinstall: `npm run hooks:install`
 
 This gives fast local quality checks before each commit, even when working directly on `main`.
+
+## Deployment
+
+- Hosted on Vercel, deployed from `main`.
+- Production domain: tricitiescriminallaw.com.
 
 ## Project Structure
 
@@ -93,9 +72,9 @@ This gives fast local quality checks before each commit, even when working direc
 │   └── prompts/
 ├── docs/
 │   ├── agents/
-│   │   ├── site-builder/
-│   │   └── template-maintainer/
-│   ├── AGENT_QUICKSTART.md
+│   │   └── site-builder/
+│   ├── PROJECT_BRIEF_TEMPLATE.md
+│   ├── SITE_PLAN.md
 │   ├── STANDARDS.md
 │   └── WCAG_2.2_CHECKLIST.md
 ├── src/
@@ -116,38 +95,27 @@ This gives fast local quality checks before each commit, even when working direc
 - Reusable layout with skip link, navbar, and footer.
 - Reusable card and button components.
 - Theme token system with primary/secondary/accent colors defined in src/styles/global.css.
-- Local Example intake tab with save-to-browser fields and generated PROJECT_BRIEF/prompt drafts.
 - Reusable styled dropdown with progressive enhancement (native select fallback).
-- Two default pages: `/` (Home) and `/example` (component catalog).
-- New pages should start from the Example page scaffold to preserve spacing and structure consistency.
+- Four live pages: `/` (Home), `/about`, `/practice-areas`, `/contact`.
 
-Note: `/example` is intended for local template work and is redirected to Home outside local dev.
+Note: `/example` is a leftover component-catalog page from the starter template. It's excluded from the sitemap/robots and redirects to Home outside local dev — safe to delete once it's no longer needed as a reference.
 
 ## Optional Backend
 
 Backend features are not included by default.
 
-If backend behavior is explicitly requested, use:
+If backend behavior is explicitly requested (e.g. a working contact form), see:
 
 - docs/agents/template-maintainer/BACKEND_ENABLEMENT.md
 
 ## Agent Workflow
 
-For AI-assisted implementation:
+For AI-assisted implementation on this project:
 
-1. Fill PROJECT_BRIEF.md using docs/PROJECT_BRIEF_TEMPLATE.md.
-2. Select agent mode in docs/AGENT_QUICKSTART.md.
-3. In cloned projects, prioritize rearranging existing components, updating copy, metadata, and tokens.
-4. In this template source repo, implement reusable code changes when new features are requested.
-5. Run npm run validate and resolve failures.
-
-Prompt starters:
-
-- .github/prompts/template-maintainer/maintain-template.prompt.md
-- .github/prompts/site-builder/use-template-without-new-code.prompt.md
-- .github/prompts/new-site-kickoff.prompt.md (first production draft from PROJECT_BRIEF.md)
+1. PROJECT_BRIEF.md is the source of truth for client scope, contacts, and open items.
+2. Use docs/agents/site-builder/README.md as the default work mode — reuse existing components, tokens, and structure rather than adding new ones.
+3. Run npm run validate and resolve failures before considering work complete.
 
 ## Notes
 
-- This repo is meant to be copied and adapted, not treated as a single product codebase.
-- Keep docs current as your process evolves.
+- Keep docs current as the site evolves.

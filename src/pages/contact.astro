@@ -24,10 +24,8 @@ import { SITE } from '../config/site';
       <InfoBlock label="Email" href={`mailto:${SITE.contactEmail}`}>
         <span class="inline-icon"><Icon name="mail" />{SITE.contactEmail}</span>
       </InfoBlock>
-      <InfoBlock label="Office Address">
-        <span class="inline-icon">
-          <Icon name="map-pin" />[Office Address] &mdash; pending client details
-        </span>
+      <InfoBlock label="Fax">
+        <span class="inline-icon"><Icon name="printer" />{SITE.fax}</span>
       </InfoBlock>
       <InfoBlock label="Service Area">
         <span class="inline-icon">
@@ -35,19 +33,101 @@ import { SITE } from '../config/site';
         </span>
       </InfoBlock>
     </div>
-    <p class="hero-copy">
-      A live contact form requires backend enablement (see
-      docs/agents/template-maintainer/BACKEND_ENABLEMENT.md) and is not included by default.
-      Phone and email links above are the day-one contact method.
-    </p>
   </section>
 
-  <section class="section section--dark stack stack--center">
+  <section class="section stack" id="contact-form">
+    <div class="stack">
+      <p class="kicker">Send a Message</p>
+      <h2>Prefer to write? Send your details below.</h2>
+      <p class="hero-copy">
+        Fill out the form and Carol's office will follow up to schedule your consultation.
+      </p>
+    </div>
+
+    <p class="form-success" role="status" data-form-success hidden>
+      Thanks &mdash; your message has been sent. Carol's office will be in touch soon.
+    </p>
+    <p class="form-error" role="alert" data-form-error hidden>
+      Something went wrong sending your message. Please call or email instead.
+    </p>
+
+    <form class="intake-form" method="POST" action="https://formspree.io/f/xeeybprq" data-contact-form>
+      <div class="intake-form__grid">
+        <label class="intake-form__field">
+          <span>Full Name</span>
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label class="intake-form__field">
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label class="intake-form__field intake-form__field--full">
+          <span>Phone</span>
+          <input type="tel" name="phone" autocomplete="tel" />
+        </label>
+        <label class="intake-form__field intake-form__field--full">
+          <span>How can we help?</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+      </div>
+      <input type="hidden" name="_subject" value="New consultation request — tricitiescriminallaw.com" />
+      <input
+        type="text"
+        name="_gotcha"
+        class="visually-hidden"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+      <div class="hero-actions">
+        <Button type="submit" variant="solid">Send Message</Button>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    const form = document.querySelector('[data-contact-form]');
+    const successEl = document.querySelector('[data-form-success]');
+    const errorEl = document.querySelector('[data-form-error]');
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement)) return;
+
+      errorEl?.setAttribute('hidden', '');
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton?.setAttribute('disabled', 'true');
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (response.ok) {
+          form.hidden = true;
+          successEl?.removeAttribute('hidden');
+        } else {
+          errorEl?.removeAttribute('hidden');
+          submitButton?.removeAttribute('disabled');
+        }
+      } catch {
+        errorEl?.removeAttribute('hidden');
+        submitButton?.removeAttribute('disabled');
+      }
+    });
+  </script>
+
+  <section class="section section--frame stack">
     <span class="panel-icon"><Icon name="phone-call" /></span>
     <div>
       <p class="kicker">Prefer to Call?</p>
       <h2>Carol is ready to discuss your case.</h2>
     </div>
+    <p class="hero-copy">
+      Call now to speak with Carol directly about your case and get answers to your questions.
+    </p>
     <div class="hero-actions">
       <Button href={SITE.phoneHref} variant="solid">Call {SITE.phone}</Button>
     </div>

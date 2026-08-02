@@ -26,17 +26,17 @@
   --tone-text: #16202b;
   --tone-text-muted: #55606b;
   --tone-border: #7c8a99;
-  --tone-primary: #16324f;
-  --tone-primary-hover: #0e2136;
+  --tone-primary: #11234a;
+  --tone-primary-hover: #0a1633;
   --tone-primary-contrast: #ffffff;
-  --tone-secondary: #2c5d8f;
+  --tone-secondary: #274c86;
   --tone-accent: #8a6a22;
   /* Lightened brass for use as accent text on dark navy surfaces (~7:1 against --tone-primary) —
      a separate token rather than a runtime mix of --tone-accent, since a custom property cannot
      reference its own value from within a local override without becoming an invalid cyclic
      reference. */
   --tone-accent-on-dark: #cabc9c;
-  --tone-ring: #16324f;
+  --tone-ring: #11234a;
 }
 
 *,
@@ -208,21 +208,45 @@ a {
   padding: 0;
   display: flex;
   justify-content: flex-end;
-  gap: var(--space-3);
+  gap: var(--space-6);
   flex-wrap: wrap;
 }
 
 .site-nav a {
+  position: relative;
   text-decoration: none;
-  padding: 0.45rem 0.7rem;
-  border-radius: var(--radius-pill);
+  padding: 0.45rem 0.1rem;
   color: var(--tone-text-muted);
   font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0.1rem;
+  bottom: 0.1rem;
+  height: 2px;
+  background: var(--tone-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.15s ease;
 }
 
 .site-nav a:hover {
-  color: color-mix(in srgb, var(--tone-secondary) 72%, var(--tone-text));
-  background: color-mix(in srgb, var(--tone-secondary) 12%, var(--tone-surface));
+  color: var(--tone-text);
+}
+
+.site-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.site-nav a[aria-current='page'] {
+  color: var(--tone-text);
+}
+
+.site-nav a[aria-current='page']::after {
+  transform: scaleX(1);
 }
 
 .styled-dropdown {
@@ -379,10 +403,14 @@ a {
   margin-block: clamp(4rem, 7vw, var(--space-24));
 }
 
+.page-main > .section:first-child {
+  margin-block-start: clamp(1.5rem, 3vw, var(--space-8));
+}
+
 .hero.grid {
+  grid-template-columns: 1.15fr 0.85fr;
   gap: var(--space-12);
   align-items: center;
-  padding-block-start: var(--space-6);
 }
 
 /* Full-bleed tinted band behind a section, for visual rhythm between sections.
@@ -482,11 +510,16 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 3.25rem;
-  block-size: 3.25rem;
+  inline-size: 4.25rem;
+  block-size: 4.25rem;
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--tone-primary) 12%, var(--tone-surface));
   color: var(--tone-primary);
+}
+
+.panel-icon svg {
+  width: 2rem;
+  height: 2rem;
 }
 
 .stack {
@@ -1007,6 +1040,10 @@ a {
   gap: var(--space-4);
 }
 
+.intake-form[hidden] {
+  display: none;
+}
+
 .intake-form__grid {
   display: grid;
   gap: var(--space-4);
@@ -1047,6 +1084,21 @@ a {
 
 .intake-form__field small {
   color: var(--tone-text-muted);
+}
+
+.form-success,
+.form-error {
+  border: 1px solid color-mix(in srgb, var(--tone-primary) 35%, var(--tone-border));
+  background: color-mix(in srgb, var(--tone-primary) 10%, var(--tone-surface));
+  color: var(--tone-text);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-6);
+  font-weight: 600;
+}
+
+.form-error {
+  border-color: color-mix(in srgb, #b3261e 35%, var(--tone-border));
+  background: color-mix(in srgb, #b3261e 10%, var(--tone-surface));
 }
 
 .intake-output {
@@ -1212,7 +1264,8 @@ a {
 
   .grid-2,
   .grid-3,
-  .intake-form__grid {
+  .intake-form__grid,
+  .hero.grid {
     grid-template-columns: 1fr;
   }
 

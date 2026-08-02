@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/ui/Button.astro';
 import TimelineItem from '../components/ui/TimelineItem.astro';
-import InfoBlock from '../components/ui/InfoBlock.astro';
 import Icon from '../components/ui/Icon.astro';
 ---
 
@@ -80,23 +79,13 @@ import Icon from '../components/ui/Icon.astro';
     </ol>
   </section>
 
-  <section class="section section--dark grid-2 grid">
-    <InfoBlock label="Focus">
-      <span class="inline-icon">
-        <Icon name="scale" />A practice dedicated exclusively to criminal defense &mdash; no civil
-        law of any kind.
-      </span>
-    </InfoBlock>
-    <InfoBlock label="Service Area">
-      <span class="inline-icon">
-        <Icon name="landmark" />Hopewell, Prince George, and Petersburg, Virginia
-      </span>
-    </InfoBlock>
-  </section>
-
   <section class="section section--frame stack">
     <span class="panel-icon"><Icon name="phone-call" /></span>
     <h2>Facing a criminal charge?</h2>
+    <p class="hero-copy">
+      Get direct, experienced counsel for your case throughout Hopewell, Prince George, and
+      Petersburg.
+    </p>
     <div class="hero-actions">
       <Button href="/contact" variant="solid">Request a Consultation</Button>
     </div>

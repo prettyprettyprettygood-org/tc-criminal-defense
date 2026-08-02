@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /example
+
+Sitemap: https://tricitiescriminallaw.com/sitemap-index.xml

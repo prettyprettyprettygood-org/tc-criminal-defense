@@ -17,8 +17,9 @@ export const SITE = {
     { href: '/practice-areas', label: 'Practice Areas' },
     { href: '/contact', label: 'Contact' },
   ],
-  contactEmail: 'contact@example.com',
+  contactEmail: 'contact@tricitiescriminallaw.com',
   phone: '(804) 352-3550',
   phoneHref: 'tel:+18043523550',
+  fax: '(804) 265-4085',
   yearStarted: 1992,
 } as const;
