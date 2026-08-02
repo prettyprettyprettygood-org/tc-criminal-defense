@@ -17,6 +17,25 @@ const { title, description = SITE.description, image = '/images/law-firm.jpg', h
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const absoluteImageURL = new URL(image, Astro.site);
 
+// Attorney (Person) entity, kept separate from the business entity below so Google can
+// associate her name directly with this site. Once she has profile URLs on LinkedIn, Avvo,
+// the VA State Bar, and her Google Business Profile, add them here as `sameAs` — that's the
+// single biggest lever for winning her personal-name search over the old practice's listing.
+const attorneyPerson = {
+  '@type': 'Person',
+  name: SITE.shortName,
+  jobTitle: 'Criminal Defense Attorney',
+  telephone: SITE.phone,
+  email: SITE.contactEmail,
+  url: Astro.site?.toString(),
+  image: absoluteImageURL.toString(),
+  // sameAs: [
+  //   'https://www.linkedin.com/in/...',
+  //   'https://www.avvo.com/attorneys/...',
+  //   'https://www.google.com/maps/place/...', (Google Business Profile URL)
+  // ],
+};
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Attorney',
@@ -25,7 +44,9 @@ const structuredData = {
   url: Astro.site?.toString(),
   image: absoluteImageURL.toString(),
   telephone: SITE.phone,
+  email: SITE.contactEmail,
   areaServed: ['Hopewell, VA', 'Prince George, VA', 'Petersburg, VA', 'Richmond, VA', 'Chesterfield, VA'],
+  founder: attorneyPerson,
 };
 ---
 
