@@ -4,7 +4,7 @@ export const SITE = {
   name: 'Carol I. Zacheiss, Attorney at Law',
   shortName: 'Carol I. Zacheiss',
   description:
-    'Criminal defense attorney serving Hopewell, Prince George, and Petersburg, Virginia, with 34 years of experience.',
+    'Criminal defense attorney serving Hopewell, Prince George, Petersburg, Richmond, and Chesterfield, Virginia, with 34 years of experience.',
   nav: [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
