@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import FeatureItem from '../components/ui/FeatureItem.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Carol I. Zacheiss, Attorney at Law"
+  description="The page you're looking for couldn't be found. Return home or contact Carol I. Zacheiss for criminal defense representation."
+>
+  <section class="section stack stack--center">
+    <p class="error-code">404</p>
+    <h1>This page couldn&rsquo;t be found.</h1>
+    <p class="hero-copy">
+      The page you were looking for may have been moved or no longer exists. Head back home, or
+      reach out directly if you need help with your case.
+    </p>
+    <div class="hero-actions hero-actions--center">
+      <Button href="/" variant="solid">Back to Home</Button>
+      <Button href="/contact" variant="outline">Contact Carol</Button>
+    </div>
+  </section>
+
+  <section class="section section--panel stack">
+    <div class="stack--center">
+      <p class="kicker">Find Your Way</p>
+      <h2>Where would you like to go?</h2>
+    </div>
+    <ul class="feature-row feature-row--center">
+      <FeatureItem title="Home" href="/">
+        <Icon name="landmark" slot="icon" />
+        Return to the homepage.
+      </FeatureItem>
+      <FeatureItem title="About" href="/about">
+        <Icon name="award" slot="icon" />
+        Learn about Carol's 34 years of experience.
+      </FeatureItem>
+      <FeatureItem title="Practice Areas" href="/practice-areas">
+        <Icon name="gavel" slot="icon" />
+        See the criminal defense matters Carol handles.
+      </FeatureItem>
+      <FeatureItem title="Contact" href="/contact">
+        <Icon name="phone-call" slot="icon" />
+        Request a consultation about your case.
+      </FeatureItem>
+    </ul>
+  </section>
+
+  <section class="section section--frame stack">
+    <span class="panel-icon"><Icon name="phone-call" /></span>
+    <h2>Facing a criminal charge?</h2>
+    <p class="hero-copy">
+      Get direct, experienced counsel for your case throughout Hopewell, Prince George,
+      Petersburg, Richmond, and Chesterfield.
+    </p>
+    <div class="hero-actions">
+      <Button href="/contact" variant="solid">Request a Consultation</Button>
+    </div>
+  </section>
+</BaseLayout>
